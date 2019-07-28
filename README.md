@@ -11,7 +11,7 @@ Social VR sample of Oculus Go and Oculus Quest using MagicOnion and UnityOpus.
 - ASP.NET Core 2.2
 - [MagicOnion 2.1.0(2.1.2)](https://github.com/Cysharp/MagicOnion/releases/tag/2.1.0)  
 Licensed under the MIT License. Copyright (c) 2016 Yoshifumi Kawai
-- [MessagePack.Unity.1.7.3.5](https://github.com/neuecc/MessagePack-CSharp/releases/tag/v.1.7.3.7)  
+- [MessagePack.Unity.1.7.3.7](https://github.com/neuecc/MessagePack-CSharp/releases/tag/v1.7.3.7)  
 Licensed under the MIT License. Copyright (c) 2017 Yoshifumi Kawai
 
 ## Unity
