@@ -40,6 +40,8 @@ public class OpusData
     public byte[] Bytes { get; set; }
     [Key(1)]
     public int EncodedLength { get; set; }
+    [Key(2)]
+    public int FrameCount { get; set; }
 }
 
 [MessagePackObject]

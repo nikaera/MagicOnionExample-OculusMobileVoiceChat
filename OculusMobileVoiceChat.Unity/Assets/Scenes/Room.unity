@@ -419,7 +419,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_UserName: TestUser
   m_RoomName: TestRoom
-  m_MagicOnionHost: 0.0.0.0
+  m_MagicOnionHost: 192.168.10.107
   m_AvatarGameObject: {fileID: 3359750578393540507, guid: 298236025db434b769a5af4a81a2889a,
     type: 3}
   m_BodyTransform: {fileID: 1543467806}

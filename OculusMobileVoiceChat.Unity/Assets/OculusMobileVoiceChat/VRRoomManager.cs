@@ -43,6 +43,9 @@ namespace Nikaera.OculusMobileVoiceChat
 
         void Awake()
         {
+#if UNITY_EDITOR
+            m_MagicOnionHost = "0.0.0.0";
+#endif
             channel = new Channel(m_MagicOnionHost, 12345, ChannelCredentials.Insecure);
             client = new GamingHubClient(m_AvatarGameObject);
 
@@ -66,12 +69,13 @@ namespace Nikaera.OculusMobileVoiceChat
             encoder.OnEncoded -= OnEncoded;
         }
 
-        void OnEncoded(byte[] data, int length)
+        void OnEncoded(byte[] data, int length, int frameCount)
         {
             voiceData = new OpusData
             {
                 Bytes = data,
-                EncodedLength = length
+                EncodedLength = length,
+                FrameCount = frameCount
             };
             client.PlayerDataAsync(playerParts, voiceData);
         }
@@ -84,11 +88,8 @@ namespace Nikaera.OculusMobileVoiceChat
                 Application.Quit();
             }
 
-
-
             if (OVRPlugin.GetSystemHeadsetType() == OVRPlugin.SystemHeadset.Oculus_Quest)
             {
-                Debug.Log("OculusQuest");
                 Vector2 RStickVec = OVRInput.Get(OVRInput.Axis2D.SecondaryThumbstick);
                 Vector2 LStickVec = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
 
@@ -107,7 +108,6 @@ namespace Nikaera.OculusMobileVoiceChat
             }
             else if (OVRPlugin.GetSystemHeadsetType() == OVRPlugin.SystemHeadset.Oculus_Go)
             {
-                Debug.Log("OculusGo");
                 if (OVRInput.Get(OVRInput.Button.PrimaryTouchpad))
                 {
                     Vector2 touchPadPt = OVRInput.Get(OVRInput.Axis2D.PrimaryTouchpad);

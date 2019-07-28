@@ -22,9 +22,14 @@ namespace Nikaera.OculusMobileVoiceChat
         [SerializeField]
         OpusPlayer m_OpusPlayer;
 
+        int currentAudioFrameCount = -1;
+
         public void PlayAudio(OpusData opusData)
         {
-            m_OpusPlayer.PlayAudio(opusData);
+            if(currentAudioFrameCount != opusData.FrameCount) {
+                currentAudioFrameCount = opusData.FrameCount;
+                m_OpusPlayer.PlayAudio(opusData);
+            }
         }
 
         public void SetName(string name) {

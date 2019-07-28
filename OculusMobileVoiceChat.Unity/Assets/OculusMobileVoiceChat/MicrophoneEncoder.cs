@@ -8,7 +8,7 @@ namespace Nikaera.OculusMobileVoiceChat
     [RequireComponent(typeof(MicrophoneRecorder))]
     public class MicrophoneEncoder : MonoBehaviour
     {
-        public event Action<byte[], int> OnEncoded;
+        public event Action<byte[], int, int> OnEncoded;
 
         const int bitrate = 96000;
         const int frameSize = 120;
@@ -19,6 +19,8 @@ namespace Nikaera.OculusMobileVoiceChat
         Queue<float> pcmQueue = new Queue<float>();
         readonly float[] frameBuffer = new float[frameSize];
         readonly byte[] outputBuffer = new byte[outputBufferSize];
+
+        private int frameCount = 0;
 
         void OnEnable()
         {
@@ -56,7 +58,7 @@ namespace Nikaera.OculusMobileVoiceChat
                     frameBuffer[i] = pcmQueue.Dequeue();
                 }
                 var encodedLength = encoder.Encode(frameBuffer, outputBuffer);
-                OnEncoded?.Invoke(outputBuffer, encodedLength);
+                OnEncoded?.Invoke(outputBuffer, encodedLength, frameCount++);
             }
         }
     }
