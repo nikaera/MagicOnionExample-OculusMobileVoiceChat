@@ -3,7 +3,6 @@ using UnityEngine;
 using MessagePack;
 using System;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 
 public interface IGamingHubReceiver
 {

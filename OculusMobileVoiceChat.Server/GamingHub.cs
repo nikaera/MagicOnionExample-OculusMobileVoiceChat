@@ -1,10 +1,8 @@
-using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
 
-using UnityEngine;
 using MagicOnion.Server.Hubs;
+using System;
 
 public class GamingHub : StreamingHubBase<IGamingHub, IGamingHubReceiver>, IGamingHub
 {
@@ -33,5 +31,10 @@ public class GamingHub : StreamingHubBase<IGamingHub, IGamingHubReceiver>, IGami
         self.Parts = parts;
         self.VoiceData = voiceData;
         BroadcastExceptSelf(room).OnPlayerData(self);
+    }
+
+    protected override async ValueTask OnDisconnected()
+    {
+        await LeaveAsync();
     }
 }

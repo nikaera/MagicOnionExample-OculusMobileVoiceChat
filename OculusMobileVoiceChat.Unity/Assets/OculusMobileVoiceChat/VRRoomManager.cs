@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Grpc.Core;
 using UnityEngine;
@@ -46,7 +47,12 @@ namespace Nikaera.OculusMobileVoiceChat
 #if UNITY_EDITOR
             m_MagicOnionHost = "0.0.0.0";
 #endif
-            channel = new Channel(m_MagicOnionHost, 12345, ChannelCredentials.Insecure);
+            List<ChannelOption> options = new List<ChannelOption> {
+                new ChannelOption("grpc.keepalive_time_ms", 2000),
+                new ChannelOption("grpc.keepalive_timeout_ms", 3000),
+                new ChannelOption("grpc.http2.min_time_between_pings_ms", 5000),
+            };
+            channel = new Channel(m_MagicOnionHost, 12345, ChannelCredentials.Insecure, options);
             client = new GamingHubClient(m_AvatarGameObject);
 
             for (int i = 0; i < playerParts.Length; i++) {
